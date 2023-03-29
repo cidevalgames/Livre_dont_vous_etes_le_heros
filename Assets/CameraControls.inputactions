@@ -92,6 +92,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Shortcuts",
+            "id": "4304e987-4d28-4a57-9b19-027367c58aa4",
+            "actions": [
+                {
+                    "name": "BreakLink",
+                    "type": "Button",
+                    "id": "42b2b2b6-c118-4a9d-be32-f7178018b924",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7d2b6b86-9fbe-4cf5-9591-51c22a2cce5d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BreakLink",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
