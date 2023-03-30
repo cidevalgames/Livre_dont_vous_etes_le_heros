@@ -755,9 +755,10 @@ GameObject:
   - component: {fileID: 7430811063052496098}
   - component: {fileID: 3040191791538572089}
   - component: {fileID: 943143841371363242}
+  - component: {fileID: 3214700144861374008}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: OpenLinkButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -989,6 +990,21 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &3214700144861374008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5561671988350151164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a5dec74f37c08429a781ac1f08b331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLinked: 0
+  linkedButton: {fileID: 0}
+  lineRenderer: {fileID: 0}
 --- !u!1 &5721452899672057878
 GameObject:
   m_ObjectHideFlags: 0

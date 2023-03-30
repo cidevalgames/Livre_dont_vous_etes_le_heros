@@ -1,9 +1,11 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Chapter", menuName = "Chapters/New chapter", order = 1)]
+[System.Serializable]
 public class Chapter : ScriptableObject
 {
     public bool end = false;
@@ -11,6 +13,11 @@ public class Chapter : ScriptableObject
     public string text;
     [Header("")]
     public List<Choice> choices = new List<Choice>();
+
+    public Choice CreateChoice()
+    {
+        return new Choice();
+    }
 }
 
 [System.Serializable]

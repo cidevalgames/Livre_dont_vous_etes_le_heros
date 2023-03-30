@@ -16,7 +16,11 @@ public class UIManager : MonoBehaviour
     {
         GameObject chapter = Instantiate(chapterPanelPrefab, canvas);
 
-        chapter.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>().onClick.AddListener(() => AddChoice(chapter.transform));
+        Button button = chapter.transform.GetChild(1).GetChild(1).GetChild(1).GetComponent<Button>();
+        button.onClick.AddListener(() => AddChoice(chapter.transform));
+
+        button = chapter.transform.GetChild(1).GetChild(0).GetComponent<Button>();
+        button.onClick.AddListener(() => LinksManager.Instance.LinkButton(button));
     }
 
     public void AddChoice(Transform choicesParent)

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1194171970576159617}
   - component: {fileID: 8630377654008861116}
   - component: {fileID: 8630377654008861117}
+  - component: {fileID: 6550877204322324878}
   m_Layer: 5
   m_Name: Chapter
   m_TagString: Untagged
@@ -179,6 +180,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6029d836bb381674ebd96a40db27fead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6550877204322324878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1194171970576159629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fa3e2699aa9a1840a13891e0e0a5154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMesh: {fileID: 1194171971651364959}
+  index: 0
+  end: 0
+  text: 
 --- !u!1 &1194171970616599114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,9 +1197,10 @@ GameObject:
   - component: {fileID: 7446649022376656114}
   - component: {fileID: 7446649022376656117}
   - component: {fileID: 7446649022376656116}
+  - component: {fileID: 2868977610700370935}
   m_Layer: 5
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: CloseLinkButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1289,6 +1307,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2868977610700370935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446649022376656118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a5dec74f37c08429a781ac1f08b331, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLinked: 0
+  linkedButton: {fileID: 0}
+  lineRenderer: {fileID: 0}
 --- !u!1 &7446649022614945896
 GameObject:
   m_ObjectHideFlags: 0

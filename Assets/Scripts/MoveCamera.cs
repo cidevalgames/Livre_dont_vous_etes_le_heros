@@ -61,4 +61,14 @@ public class MoveCamera : MonoBehaviour
             direction = Vector2.zero;
         }
     }
+
+    private void Update()
+    {
+        if (Input.mouseScrollDelta != Vector2.zero)
+        {
+            Camera camera = GetComponent<Camera>();
+
+            camera.orthographicSize = Mathf.Clamp(camera.orthographicSize - Input.mouseScrollDelta.y, 2, 15);
+        }
+    }
 }
