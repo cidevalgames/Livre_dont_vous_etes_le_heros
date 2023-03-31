@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class LoadData : MonoBehaviour
 {

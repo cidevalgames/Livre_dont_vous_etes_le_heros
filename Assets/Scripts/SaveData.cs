@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.SocialPlatforms.Impl;
-using System.Security.Cryptography.X509Certificates;
 
 public class SaveData : MonoBehaviour
 {

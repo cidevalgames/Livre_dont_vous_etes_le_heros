@@ -6,6 +6,7 @@ TagManager:
   tags:
   - OpenLinkButton
   - CloseLinkButton
+  - Chapter
   layers:
   - Default
   - TransparentFX

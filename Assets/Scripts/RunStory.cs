@@ -45,7 +45,7 @@ public class RunStory : MonoBehaviour
             chapterText.text += "\n\n";
             chapterText.text += "Choix " + (i + 1) + " : " + chapter.choices[i].text;
 
-            int index = chapter.choices[i].index;
+            int index = chapter.choices[i].probabilities[0].index;
             GameObject button = Instantiate(choiceButtonPrefab, buttonsParent);
             buttonsParent.GetChild(i).GetComponent<Button>().onClick.AddListener(() => ClickedChoiceButton(index));
             button.GetComponentInChildren<TextMeshProUGUI>().text = "Choix " + (i + 1);
@@ -74,7 +74,7 @@ public class RunStory : MonoBehaviour
                 chapterText.text += "\n\n";
                 chapterText.text += "Choix " + (i + 1) + " : " + chapter.choices[i].text;
 
-                int choiceIndex = chapter.choices[i].index;
+                int choiceIndex = chapter.choices[i].probabilities[0].index;
                 GameObject choiceButton = Instantiate(choiceButtonPrefab, buttonsParent);
                 buttonsParent.GetChild(i).GetComponent<Button>().onClick.AddListener(() => ClickedChoiceButton(choiceIndex));
                 choiceButton.GetComponentInChildren<TextMeshProUGUI>().text = "Choix " + (i + 1);
