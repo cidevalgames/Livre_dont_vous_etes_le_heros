@@ -604,6 +604,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902553865}
   m_CullTransparentMesh: 1
+--- !u!1 &983189219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 983189221}
+  - component: {fileID: 983189220}
+  m_Layer: 0
+  m_Name: DataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &983189220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983189219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c094ab65d577243bad3f8e1e13938c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  datas: []
+  chapters: []
+--- !u!4 &983189221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983189219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1055053446
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f980bcf071fc91d4aa44b4a29ce22c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyFolder: "Zelda Adventure\u200B"
+  storyFolder: histoire
   story: []
   scrollViewContent: {fileID: 1716874044}
   chapterPrefab: {fileID: 1283883666044264357, guid: 03afc77cd42330b42abdc5b0b9ffa1b2, type: 3}

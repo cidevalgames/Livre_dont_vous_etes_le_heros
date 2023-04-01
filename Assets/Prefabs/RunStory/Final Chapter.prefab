@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 2809653804327946141}
   - component: {fileID: 603418258844321155}
   - component: {fileID: 719070393144603569}
+  - component: {fileID: 6103352868873429794}
   m_Layer: 5
   m_Name: Final Chapter
   m_TagString: Untagged
@@ -240,6 +241,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6103352868873429794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 717773252999430482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14774e047812422448a74d05df10b072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chapterNumberText: {fileID: 1375159886500524807}
+  chapterText: {fileID: 1389543866455952689}
+  buttonsParent: {fileID: 0}
+  choicesButtons: []
+  reloadButton: {fileID: 1389543866168766880}
+  quitButton: {fileID: 525671305044628136}
 --- !u!1 &1389543866145041754
 GameObject:
   m_ObjectHideFlags: 0

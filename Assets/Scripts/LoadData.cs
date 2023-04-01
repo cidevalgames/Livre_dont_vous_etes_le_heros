@@ -9,9 +9,9 @@ public class LoadData : MonoBehaviour
     public List<TextAsset> datas = new List<TextAsset>();
     public List<Chapter> chapters = new List<Chapter>();
 
-    private void Start()
+    private void Awake()
     {
-        string storyFolder = FindObjectOfType<CreateStory>().storyName;
+        string storyFolder = FindObjectOfType<RunStory>().storyFolder;
 
         string storyPath = "Assets/ScriptableObjects/" + storyFolder;
 
@@ -22,7 +22,10 @@ public class LoadData : MonoBehaviour
         chapters = AssetDatabase.FindAssets("t:Chapter", new string[] { storyPath })
             .Select(guid => AssetDatabase.LoadAssetAtPath<Chapter>(AssetDatabase.GUIDToAssetPath(guid)))
             .ToList();
+    }
 
+    private void Start()
+    {
         Load(datas, chapters);
     }
 

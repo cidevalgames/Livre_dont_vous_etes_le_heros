@@ -27,4 +27,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
+    public void ResetStory()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

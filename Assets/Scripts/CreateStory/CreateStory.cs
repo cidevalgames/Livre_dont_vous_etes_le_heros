@@ -17,7 +17,7 @@ public class CreateStory : MonoBehaviour
         AssetDatabase.CreateAsset(newChapter, "Assets/ScriptableObjects/" + storyName + "/" + chapter.index.ToString() + ".asset");
 
         newChapter.index = chapter.index;
-        newChapter.end = chapter.end;
+        newChapter.end = chapter.choices.Count == 0;
         newChapter.text = chapter.text;
         newChapter.choices = chapter.choices;
     }
@@ -35,8 +35,6 @@ public class CreateStory : MonoBehaviour
 
         foreach (Chapter chapter in FindObjectOfType<Chapters>().StoreChapters())
         {
-            print(chapter.text);
-
             InstantiateNewChapter(chapter);
         }
     }
