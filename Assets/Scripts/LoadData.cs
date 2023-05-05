@@ -13,7 +13,7 @@ public class LoadData : MonoBehaviour
     {
         string storyFolder = FindObjectOfType<RunStory>().storyFolder;
 
-        string storyPath = "Assets/ScriptableObjects/" + storyFolder;
+        string storyPath = "Assets/ScriptableObjects/_Zelda_"/* + storyFolder*/;
 
         datas = AssetDatabase.FindAssets("t:TextAsset", new string[] { storyPath })
             .Select(guid => AssetDatabase.LoadAssetAtPath<TextAsset>(AssetDatabase.GUIDToAssetPath(guid)))

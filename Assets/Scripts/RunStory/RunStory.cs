@@ -63,7 +63,7 @@ public class RunStory : MonoBehaviour
     {
         GameObject chapterInstance;
         Chapter chapter = story[index];
-        
+
         if (chapter.end == false)
         {
             chapterInstance = Instantiate(chapterPrefab, scrollViewContent);
@@ -71,7 +71,7 @@ public class RunStory : MonoBehaviour
             ChapterComponents chapterComponents = chapterInstance.GetComponent<ChapterComponents>();
             Transform buttonsParent = chapterComponents.buttonsParent;
             TextMeshProUGUI chapterText = chapterComponents.chapterText;
-            List<Button> buttons = chapterComponents.choicesButtons; 
+            List<Button> buttons = chapterComponents.choicesButtons;
 
             chapterText.text = chapter.text;
 
