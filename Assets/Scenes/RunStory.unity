@@ -1013,7 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f980bcf071fc91d4aa44b4a29ce22c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyFolder: histoire
+  storyFolder: la_mysterieuse_piece
   story: []
   scrollViewContent: {fileID: 1716874044}
   chapterPrefab: {fileID: 1283883666044264357, guid: 03afc77cd42330b42abdc5b0b9ffa1b2, type: 3}
