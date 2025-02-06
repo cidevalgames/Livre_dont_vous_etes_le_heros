@@ -3,31 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Choices : MonoBehaviour
+namespace StoryEditor
 {
-    public Dictionary<GameObject, Choice> choices = new Dictionary<GameObject, Choice>();
-
-    [SerializeField] GameObject choicePrefab;
-
-    public void AddChoice()
+    public class Choices : MonoBehaviour
     {
-        GameObject choice = Instantiate(choicePrefab, transform);
+        public List<Choice> choices = new List<Choice>();
 
-        choices.Add(choice, new Choice());
-    }
+        [SerializeField] GameObject choicePrefab;
 
-    public List<Choice> StoreChoices()
-    {
-        foreach (KeyValuePair<GameObject, Choice> choice in choices.ToList())
+        public void AddChoice()
         {
-            Choice newChoice = new Choice();
-            newChoice.text = choice.Key.GetComponent<ChoiceText>().text.text;
+            GameObject choiceGO = Instantiate(choicePrefab, transform);
+            Choice choice = choiceGO.AddComponent<Choice>();
 
-            newChoice.probabilities = choice.Key.GetComponentInChildren<Probabilities>().StoreProbabilities();
-
-            choices[choice.Key] = newChoice;
+            choices.Add(choice);
         }
 
-        return choices.Values.ToList<Choice>();
+        public List<Choice> StoreChoices()
+        {
+            Choice[] newChoices = new Choice[choices.Count];
+
+            for (int i = 0; i < choices.Count; i++)
+            {
+                Choice currentChoice = choices[i];
+
+                Choice newChoice = new Choice();
+
+                newChoice.text = currentChoice.ChoiceUI.GetChoiceText();
+                newChoice.probabilities = currentChoice.GetComponentInChildren<Probabilities>().StoreProbabilities();
+                
+                newChoices[i] = newChoice;
+            }
+
+            return newChoices.ToList();
+        }
     }
 }

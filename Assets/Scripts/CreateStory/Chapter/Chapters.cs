@@ -3,59 +3,58 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using StoryEditor;
 
 public class Chapters : MonoBehaviour
 {
-    public Dictionary<GameObject, Chapter> chapters = new Dictionary<GameObject, Chapter>();
+    public List<Chapter> chapters = new();
 
     [SerializeField] GameObject chapterPanelPrefab;
 
     private void Awake()
     {
-        GameObject[] setupChapters = GameObject.FindGameObjectsWithTag("Chapter");
+        Chapter[] setupChapters = FindObjectsOfType<Chapter>();
 
-        foreach (GameObject chapter in setupChapters)
+        foreach (Chapter chapter in setupChapters)
         {
-            chapters.Add(chapter, new Chapter());
+            chapter.ChapterSO = new ChapterSO();
         }
     }
 
     public void AddChapter()
     {
         GameObject chapter = Instantiate(chapterPanelPrefab, transform);
+        Chapter newChapter = chapter.GetComponent<Chapter>();
 
-        ChapterButtons buttons = chapter.GetComponent<ChapterButtons>();
-
-        Button linkButton = buttons.linkButton;
-        linkButton.onClick.AddListener(() => LinksManager.Instance.LinkButton(linkButton));
-
-        Button addChoiceButton = buttons.addChoiceButton;
-        addChoiceButton.onClick.AddListener(() => chapter.GetComponentInChildren<Choices>().AddChoice());
-
-        chapters.Add(chapter, new Chapter());
+        newChapter.ChapterSO = new ChapterSO();
+        newChapter.ChapterUI.Initialize();
     }
 
-    public List<Chapter> StoreChapters()
+    public List<ChapterSO> StoreChapters()
     {
-        int i = 0;
+        List<ChapterSO> chaptersToStore = new();
 
-        foreach (KeyValuePair<GameObject, Chapter> chapter in chapters.ToList())
+        for (int i = 0; i < chapters.Count; i++)
         {
-            Chapter newChapter = new Chapter();
+            ChapterSO newChapter = new ChapterSO();
+            Chapter chapter = chapters[i];
+
             newChapter.index = i;
             newChapter.end = false;
-            newChapter.text = chapter.Key.GetComponent<ChapterText>().text.text;
+            newChapter.text = chapter.ChapterUI.GetChapterText();
 
-            chapters[chapter.Key] = newChapter;
-
-            i++;
+            chapter.ChapterSO = newChapter;
         }
 
-        foreach (KeyValuePair<GameObject, Chapter> chapter in chapters)
+        foreach (Chapter chapter in chapters)
         {
-            chapter.Value.choices = chapter.Key.GetComponentInChildren<Choices>().StoreChoices();
+            ChapterSO currentChapterSO = chapter.ChapterSO;
+
+            currentChapterSO.choices = chapter.GetComponentInChildren<Choices>().StoreChoices();
+
+            chaptersToStore.Add(currentChapterSO);
         }
 
-        return chapters.Values.ToList<Chapter>();
+        return chaptersToStore;
     }
 }

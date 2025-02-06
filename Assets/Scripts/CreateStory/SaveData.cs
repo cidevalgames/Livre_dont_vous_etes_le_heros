@@ -11,7 +11,7 @@ public class SaveData : MonoBehaviour
 
     [SerializeField] GameObject registeringCanvas;
 
-    List<Chapter> story = new List<Chapter>();
+    List<ChapterSO> story = new List<ChapterSO>();
     string storyPath;
 
     bool registering = false;
@@ -25,7 +25,7 @@ public class SaveData : MonoBehaviour
             storyPath = "Assets/ScriptableObjects/" + storyFolder;
 
             story = AssetDatabase.FindAssets("t:Chapter", new string[] { storyPath })
-                .Select(guid => AssetDatabase.LoadAssetAtPath<Chapter>(AssetDatabase.GUIDToAssetPath(guid)))
+                .Select(guid => AssetDatabase.LoadAssetAtPath<ChapterSO>(AssetDatabase.GUIDToAssetPath(guid)))
                 .ToList();
 
             for (int i = 0; i < story.Count; i++)
@@ -39,7 +39,7 @@ public class SaveData : MonoBehaviour
         }
     }
 
-    public void SaveIntoJson(Chapter _chapter)
+    public void SaveIntoJson(ChapterSO _chapter)
     {
         string chapter = JsonUtility.ToJson(_chapter);
         System.IO.File.WriteAllText("Assets/ScriptableObjects/" + storyFolder + "/" + _chapter.name + ".json", chapter);

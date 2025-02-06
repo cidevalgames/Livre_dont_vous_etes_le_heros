@@ -5,12 +5,13 @@ using System.Linq;
 using TMPro;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using StoryEditor;
 
 public class RunStory : MonoBehaviour
 {
     public string storyFolder;
 
-    public List<Chapter> story = new List<Chapter>();
+    public List<ChapterSO> story = new List<ChapterSO>();
 
     [SerializeField] Transform scrollViewContent;
     [SerializeField] GameObject chapterPrefab;
@@ -24,14 +25,14 @@ public class RunStory : MonoBehaviour
         storyPath = "Assets/ScriptableObjects/" + storyFolder;
 
         story = AssetDatabase.FindAssets("t:Chapter", new string[] { storyPath })
-            .Select(guid => AssetDatabase.LoadAssetAtPath<Chapter>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Select(guid => AssetDatabase.LoadAssetAtPath<ChapterSO>(AssetDatabase.GUIDToAssetPath(guid)))
             .ToList();
     }
 
     private void Start()
     {
         GameObject firstChapter = Instantiate(chapterPrefab, scrollViewContent);
-        Chapter chapter = story[0];
+        ChapterSO chapter = story[0];
         ChapterComponents chapterComponents = firstChapter.GetComponent<ChapterComponents>();
 
         TextMeshProUGUI chapterText = chapterComponents.chapterText;
@@ -62,7 +63,7 @@ public class RunStory : MonoBehaviour
     public void ClickedChoiceButton(int index)
     {
         GameObject chapterInstance;
-        Chapter chapter = story[index];
+        ChapterSO chapter = story[index];
 
         if (chapter.end == false)
         {

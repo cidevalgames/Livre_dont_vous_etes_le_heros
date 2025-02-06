@@ -4,40 +4,48 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Probabilities : MonoBehaviour
+namespace StoryEditor
 {
-    public Dictionary<GameObject, ChoiceProbability> choiceProbabilities = new Dictionary<GameObject, ChoiceProbability>();
-
-    [SerializeField] GameObject probabilityPrefab;
-
-    public void AddProbability(Transform probabilitiesParent)
+    public class Probabilities : MonoBehaviour
     {
-        GameObject probability = Instantiate(probabilityPrefab, probabilitiesParent);
+        public List<ChoiceProbability> choiceProbabilities = new List<ChoiceProbability>();
 
-        Button linkButton = probability.GetComponent<ProbabilityLinkButton>().linkButton;
-        linkButton.onClick.AddListener(() => FindObjectOfType<LinksManager>().LinkButton(linkButton));
+        [SerializeField] GameObject probabilityPrefab;
 
-        choiceProbabilities.Add(probability, new ChoiceProbability());
-    }
-
-    public List<ChoiceProbability> StoreProbabilities()
-    {
-        foreach (KeyValuePair<GameObject, ChoiceProbability> probability in choiceProbabilities.ToList())
+        public void AddProbability(Transform probabilitiesParent)
         {
-            ChoiceProbability newChoiceProbability = new ChoiceProbability();
-            newChoiceProbability.probability = (int) probability.Key.GetComponentInChildren<ProbabilitySlider>().slider.value;
+            GameObject probabilityGO = Instantiate(probabilityPrefab, probabilitiesParent);
+            ChoiceProbability probability = probabilityGO.AddComponent<ChoiceProbability>();
 
-            foreach (KeyValuePair<GameObject, Chapter> chapter in FindObjectOfType<Chapters>().chapters)
-            {
-                if (chapter.Key.GetComponentInChildren<LinkedButton>().linkedButton == probability.Key.GetComponent<ProbabilityLinkButton>().linkButton)
-                {
-                    newChoiceProbability.index = chapter.Value.index;
-                }
-            }
+            Button linkButton = probabilityGO.GetComponent<ProbabilityLinkButton>().linkButton;
+            probability.ProbabilityUI.Initialize();
 
-            choiceProbabilities[probability.Key] = newChoiceProbability;
+            choiceProbabilities.Add(probability);
         }
 
-        return choiceProbabilities.Values.ToList<ChoiceProbability>();
+        public List<ChoiceProbability> StoreProbabilities()
+        {
+            ChoiceProbability[] newProbabilities = new ChoiceProbability[choiceProbabilities.Count];
+
+            for (int i = 0; i < choiceProbabilities.Count; i++)
+            {
+                ChoiceProbability probability = choiceProbabilities[i];
+
+                ChoiceProbability newChoiceProbability = new ChoiceProbability();
+                newChoiceProbability.probability = probability.ProbabilityUI.GetProbabilitySliderValue();
+
+                foreach (Chapter chapter in FindObjectOfType<Chapters>().chapters)
+                {
+                    if (chapter.GetComponentInChildren<LinkedButton>().LinkButton == probability.GetComponent<ProbabilityLinkButton>().linkButton)
+                    {
+                        newChoiceProbability.index = chapter.ChapterSO.index;
+                    }
+                }
+
+                newProbabilities[i] = newChoiceProbability;
+            }
+
+            return newProbabilities.ToList();
+        }
     }
 }

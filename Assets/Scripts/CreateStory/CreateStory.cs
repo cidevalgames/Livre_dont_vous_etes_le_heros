@@ -10,9 +10,9 @@ public class CreateStory : MonoBehaviour
     
     public string storyName;
 
-    public void InstantiateNewChapter(Chapter chapter)
+    public void InstantiateNewChapter(ChapterSO chapter)
     {
-        Chapter newChapter = ScriptableObject.CreateInstance<Chapter>();
+        ChapterSO newChapter = ScriptableObject.CreateInstance<ChapterSO>();
 
         AssetDatabase.CreateAsset(newChapter, "Assets/ScriptableObjects/" + storyName + "/" + chapter.index.ToString() + ".asset");
 
@@ -33,7 +33,7 @@ public class CreateStory : MonoBehaviour
 
         Directory.CreateDirectory("Assets/ScriptableObjects/" + storyName);
 
-        foreach (Chapter chapter in FindObjectOfType<Chapters>().StoreChapters())
+        foreach (ChapterSO chapter in FindObjectOfType<Chapters>().StoreChapters())
         {
             InstantiateNewChapter(chapter);
         }

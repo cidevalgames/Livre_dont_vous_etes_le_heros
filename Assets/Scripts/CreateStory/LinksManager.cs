@@ -4,100 +4,104 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class LinksManager : MonoBehaviour
+namespace StoryEditor
 {
-    public static LinksManager Instance;
-
-    [SerializeField] GameObject lineRendererPrefab;
-
-    bool isLinking = false;
-    GameObject actualLineRenderer = null;
-    Vector3 mouseLinkPosition = Vector3.zero;
-    Button firstButton;
-    Button secondButton;
-
-    private void Awake()
+    public class LinksManager : MonoBehaviour
     {
-        Instance = this;
-    }
+        public static LinksManager Instance;
 
-    public void LinkButton(Button clickedButton)
-    {
-        if (!isLinking && clickedButton.CompareTag("OpenLinkButton"))
+        [SerializeField] GameObject lineRendererPrefab;
+
+        private bool _isLinking = false;
+        private GameObject _currentLineRenderer = null;
+        private Vector3 _mouseLinkPosition = Vector3.zero;
+        private Button _firstButton;
+        private Button _secondButton;
+
+        private void Awake()
         {
-            LinkedButton linkedButtonToClicked = clickedButton.GetComponent<LinkedButton>();
+            if (!Instance)
+                Instance = this;
+        }
 
-            if (linkedButtonToClicked.isLinked)
+        public void LinkButton(Button clickedButton)
+        {
+            if (!_isLinking && clickedButton.CompareTag("OpenLinkButton"))
             {
-                Destroy(linkedButtonToClicked.lineRenderer);
+                LinkedButton linkedButtonToClicked = clickedButton.GetComponent<LinkedButton>();
 
-                linkedButtonToClicked.isLinked = false;
-                linkedButtonToClicked.lineRenderer = null;
+                if (linkedButtonToClicked.IsLinked)
+                {
+                    Destroy(linkedButtonToClicked.LineRenderer);
 
-                LinkedButton clickedButtonLinkedButton = linkedButtonToClicked.linkedButton.GetComponent<LinkedButton>();
+                    linkedButtonToClicked.IsLinked = false;
+                    linkedButtonToClicked.LineRenderer = null;
 
-                clickedButtonLinkedButton.isLinked = false;
-                clickedButtonLinkedButton.lineRenderer = null;
-                clickedButtonLinkedButton.linkedButton = null;
+                    LinkedButton clickedButtonLinkedButton = linkedButtonToClicked.LinkButton.GetComponent<LinkedButton>();
 
-                linkedButtonToClicked.linkedButton = null;
-                
+                    clickedButtonLinkedButton.IsLinked = false;
+                    clickedButtonLinkedButton.LineRenderer = null;
+                    clickedButtonLinkedButton.LinkButton = null;
+
+                    linkedButtonToClicked.LinkButton = null;
+                }
+
+                _currentLineRenderer = Instantiate(lineRendererPrefab);
+                _currentLineRenderer.transform.position = clickedButton.transform.position;
+
+                _currentLineRenderer.GetComponent<LineRendererHandler>().OpenLink(clickedButton);
+
+                _mouseLinkPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+
+                _firstButton = clickedButton;
+
+                _isLinking = true;
             }
+            else if (_isLinking && clickedButton.CompareTag("CloseLinkButton"))
+            {
+                _currentLineRenderer.GetComponent<LineRenderer>().SetPosition(1, clickedButton.transform.position);
+                _currentLineRenderer.GetComponent<LineRendererHandler>().CloseLink(clickedButton);
 
-            actualLineRenderer = Instantiate(lineRendererPrefab);
-            actualLineRenderer.transform.position = clickedButton.transform.position;
+                _mouseLinkPosition = Vector3.zero;
 
-            actualLineRenderer.GetComponent<LineRendererManager>().OpenLink(clickedButton);
+                _secondButton = clickedButton;
 
-            mouseLinkPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+                LinkedButton firstButtonScript = _firstButton.GetComponent<LinkedButton>();
 
-            firstButton = clickedButton;
+                firstButtonScript.IsLinked = true;
+                firstButtonScript.LinkButton = _secondButton;
+                firstButtonScript.LineRenderer = _currentLineRenderer;
 
-            isLinking = true;
+                LinkedButton secondButtonScript = _secondButton.GetComponent<LinkedButton>();
+
+                secondButtonScript.IsLinked = true;
+                secondButtonScript.LinkButton = _firstButton;
+                secondButtonScript.LineRenderer = _currentLineRenderer;
+
+                _currentLineRenderer = null;
+
+                _isLinking = false;
+            }
         }
-        else if (isLinking && clickedButton.CompareTag("CloseLinkButton"))
+
+        public void OnBreakLink(InputAction.CallbackContext callback)
         {
-            actualLineRenderer.GetComponent<LineRenderer>().SetPosition(1, clickedButton.transform.position);
-            actualLineRenderer.GetComponent<LineRendererManager>().CloseLink(clickedButton);
-
-            mouseLinkPosition = Vector3.zero;
-
-            secondButton = clickedButton;
-
-            LinkedButton firstButtonScript = firstButton.GetComponent<LinkedButton>();
-            LinkedButton secondButtonScript = secondButton.GetComponent<LinkedButton>();
-
-            firstButtonScript.isLinked = true;
-            firstButtonScript.linkedButton = secondButton;
-            firstButtonScript.lineRenderer = actualLineRenderer;
-
-            secondButtonScript.isLinked = true;
-            secondButtonScript.linkedButton = firstButton;
-            secondButtonScript.lineRenderer = actualLineRenderer;
-
-            actualLineRenderer = null;
-
-            isLinking = false;
+            if (callback.performed && _isLinking)
+            {
+                Destroy(_currentLineRenderer);
+                _currentLineRenderer = null;
+                _isLinking = false;
+            }
         }
-    }
 
-    public void OnBreakLink(InputAction.CallbackContext callback)
-    {
-        if (callback.performed && isLinking)
+        private void Update()
         {
-            Destroy(actualLineRenderer);
-            actualLineRenderer = null;
-            isLinking = false;
-        }
-    }
+            if (_isLinking)
+            {
+                _currentLineRenderer.GetComponent<LineRenderer>().SetPosition(1, _mouseLinkPosition);
 
-    private void FixedUpdate()
-    {
-        if (isLinking)
-        {
-            actualLineRenderer.GetComponent<LineRenderer>().SetPosition(1, mouseLinkPosition);
-
-            mouseLinkPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+                _mouseLinkPosition = new Vector3(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y, 0);
+            }
         }
     }
 }

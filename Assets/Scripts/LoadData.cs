@@ -7,7 +7,7 @@ using System.Linq;
 public class LoadData : MonoBehaviour
 {
     public List<TextAsset> datas = new List<TextAsset>();
-    public List<Chapter> chapters = new List<Chapter>();
+    public List<ChapterSO> chapters = new List<ChapterSO>();
 
     private void Awake()
     {
@@ -20,7 +20,7 @@ public class LoadData : MonoBehaviour
             .ToList();
 
         chapters = AssetDatabase.FindAssets("t:Chapter", new string[] { storyPath })
-            .Select(guid => AssetDatabase.LoadAssetAtPath<Chapter>(AssetDatabase.GUIDToAssetPath(guid)))
+            .Select(guid => AssetDatabase.LoadAssetAtPath<ChapterSO>(AssetDatabase.GUIDToAssetPath(guid)))
             .ToList();
     }
 
@@ -29,7 +29,7 @@ public class LoadData : MonoBehaviour
         Load(datas, chapters);
     }
 
-    public void Load(List<TextAsset> datas, List<Chapter> chapters)
+    public void Load(List<TextAsset> datas, List<ChapterSO> chapters)
     {
         for (int i = 0; i < datas.Count; i++)
         {

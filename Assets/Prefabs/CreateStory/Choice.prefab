@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 146, y: 0}
+  m_SizeDelta: {x: 284, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &23282926223775129
 MonoBehaviour:
@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0743a923de18d840b34d10df8363d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  probabilities: []
   probabilityPrefab: {fileID: 6019666024879049962, guid: 219d8b52fc2b1fa42ae209343ac137c7, type: 3}
 --- !u!1 &23282926417331258
 GameObject:
@@ -375,7 +374,8 @@ GameObject:
   - component: {fileID: 2978782988953715625}
   - component: {fileID: 2978782988953715623}
   - component: {fileID: 2978782988953715624}
-  - component: {fileID: 2271344160469654489}
+  - component: {fileID: 5629053225063847235}
+  - component: {fileID: 8902393877409354255}
   m_Layer: 5
   m_Name: Choice
   m_TagString: Untagged
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2271344160469654489
+--- !u!114 &5629053225063847235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -494,10 +494,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2978782988953715626}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e99ae22768b9b84f964143054a3cd50, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fc834fd98d59a448babc64bcf63392d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 1542569640669938298}
+  text: 
+  probabilities: []
+--- !u!114 &8902393877409354255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2978782988953715626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b5c08dedd384a40a0e9f6f44c8f070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chapterTextInputField: {fileID: 2969788034877691981}
 --- !u!1 &5576969681759817643
 GameObject:
   m_ObjectHideFlags: 0
