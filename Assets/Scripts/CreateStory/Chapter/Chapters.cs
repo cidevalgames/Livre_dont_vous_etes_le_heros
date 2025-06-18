@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using StoryEditor;
+using static UnityEngine.ScriptableObject;
 
 public class Chapters : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Chapters : MonoBehaviour
 
         foreach (Chapter chapter in setupChapters)
         {
-            chapter.ChapterSO = new ChapterSO();
+            chapter.ChapterSO = CreateInstance(typeof(ChapterSO)) as ChapterSO;
         }
     }
 
@@ -26,7 +27,7 @@ public class Chapters : MonoBehaviour
         GameObject chapter = Instantiate(chapterPanelPrefab, transform);
         Chapter newChapter = chapter.GetComponent<Chapter>();
 
-        newChapter.ChapterSO = new ChapterSO();
+        newChapter.ChapterSO = CreateInstance(typeof(ChapterSO)) as ChapterSO;
         newChapter.ChapterUI.Initialize();
     }
 
@@ -36,7 +37,7 @@ public class Chapters : MonoBehaviour
 
         for (int i = 0; i < chapters.Count; i++)
         {
-            ChapterSO newChapter = new ChapterSO();
+            ChapterSO newChapter = CreateInstance(typeof(ChapterSO)) as ChapterSO;
             Chapter chapter = chapters[i];
 
             newChapter.index = i;
