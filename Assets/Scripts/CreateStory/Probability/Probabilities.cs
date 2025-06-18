@@ -18,7 +18,6 @@ namespace StoryEditor
             ChoiceProbability probability = probabilityGO.AddComponent<ChoiceProbability>();
 
             Button linkButton = probabilityGO.GetComponent<ProbabilityLinkButton>().linkButton;
-            probability.ProbabilityUI.Initialize();
 
             choiceProbabilities.Add(probability);
         }

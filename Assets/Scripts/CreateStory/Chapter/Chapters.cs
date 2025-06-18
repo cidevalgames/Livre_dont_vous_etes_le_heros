@@ -28,7 +28,6 @@ public class Chapters : MonoBehaviour
         Chapter newChapter = chapter.GetComponent<Chapter>();
 
         newChapter.ChapterSO = CreateInstance(typeof(ChapterSO)) as ChapterSO;
-        newChapter.ChapterUI.Initialize();
     }
 
     public List<ChapterSO> StoreChapters()

@@ -10,14 +10,23 @@ namespace StoryEditor
         [SerializeField] private Button linkButton;
         [SerializeField] private Slider probabilitySlider;
 
+        private bool _initialized = false;
+
         private void Awake()
         {
             linkButton = GetComponentInChildren<ProbabilityLinkButton>().linkButton;
+
+            Initialize();
         }
 
         public void Initialize()
         {
+            if (_initialized)
+                return;
+
             linkButton.onClick.AddListener(OnClick_Link);
+
+            _initialized = true;
         }
 
         public int GetProbabilitySliderValue()
