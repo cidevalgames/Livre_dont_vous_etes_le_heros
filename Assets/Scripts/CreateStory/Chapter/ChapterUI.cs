@@ -27,7 +27,7 @@ namespace StoryEditor
             if (_initialized)
                 return;
 
-            linkButton.onClick.AddListener(OnClick_Link);
+            linkButton?.onClick.AddListener(OnClick_Link);
             addChoiceButton.onClick.AddListener(OnClick_AddChoice);
 
             _initialized = true;
@@ -41,7 +41,11 @@ namespace StoryEditor
         #region Button events
         private void OnClick_Link() => LinksManager.Instance.LinkButton(linkButton);
 
-        private void OnClick_AddChoice() => GetComponentInChildren<Choices>().AddChoice();
+        private void OnClick_AddChoice() {
+            Choices choices = GetComponentInChildren<Choices>(true);
+            choices.gameObject.SetActive(true);
+            choices.AddChoice();
+        }
         #endregion
     }
 }

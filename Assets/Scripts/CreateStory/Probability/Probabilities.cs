@@ -12,9 +12,9 @@ namespace StoryEditor
 
         [SerializeField] GameObject probabilityPrefab;
 
-        public void AddProbability(Transform probabilitiesParent)
+        public void AddProbability()
         {
-            GameObject probabilityGO = Instantiate(probabilityPrefab, probabilitiesParent);
+            GameObject probabilityGO = Instantiate(probabilityPrefab, transform);
             ChoiceProbability probability = probabilityGO.AddComponent<ChoiceProbability>();
 
             Button linkButton = probabilityGO.GetComponent<ProbabilityLinkButton>().linkButton;
